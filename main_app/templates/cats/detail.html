@@ -16,6 +16,11 @@
       <h2>A {{ cat.breed }} kitten.</h2>
     {% endif %}
     <p>{{ cat.description }}</p>
+
+    <div class="cat-actions">
+      <a href="{% url 'cat-update' cat.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'cat-delete' cat.id %}" class="btn danger">Delete</a>
+    </div>
   </div>
 </section>
 {% endblock %}

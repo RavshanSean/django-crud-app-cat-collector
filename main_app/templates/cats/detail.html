@@ -23,4 +23,39 @@
     </div>
   </div>
 </section>
+
+<!-- Existing cat-container above -->
+<div class="feedings-toy-container">
+  <section class="feedings">
+    <div class="subsection-title">
+      <h2>Feedings</h2>
+      <img
+        src="{% static 'images/cat-cone.svg' %}"
+        alt="An ice cream cone cat"
+      />
+      <img src="{% static 'images/cat-onigiri.svg' %}" alt="A cat as onigiri" />
+      <img
+        src="{% static 'images/kitty-kabob.svg' %}"
+        alt="A kabob of kittens"
+      />
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Meal</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for feeding in cat.feeding_set.all %}
+          <tr>
+            <td>{{feeding.date}}</td>
+            <td>{{feeding.get_meal_display}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+</div>
+
 {% endblock %}

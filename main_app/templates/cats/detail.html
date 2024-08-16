@@ -39,22 +39,41 @@
         alt="A kabob of kittens"
       />
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Meal</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for feeding in cat.feeding_set.all %}
+
+    <h3>Add a Feeding</h3>
+    <!-- Add just above the feedings table -->
+    <form action="{% url 'add-feeding' cat.id %}"
+          method="post" class="subsection-content" autocomplete="off">
+      {% csrf_token %} 
+      {{ feeding_form.as_p }}
+      <button type="submit" class="btn submit">Add Feeding</button>
+    </form>
+    
+
+    <h3>Past Feedings</h3>
+    {% if cat.feeding_set.all.count %}
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Meal</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for feeding in cat.feeding_set.all %}
           <tr>
             <td>{{feeding.date}}</td>
             <td>{{feeding.get_meal_display}}</td>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="subsection-content">
+        <p>⚠️ {{cat.name}} has not been fed!</p>
+      </div>
+    {% endif %}
+    
   </section>
 </div>
 

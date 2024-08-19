@@ -32,7 +32,7 @@ class CatCreate(CreateView):
 
 class CatUpdate(UpdateView):
     model = Cat
-    fields = ['breed', 'description', 'age']
+    fields = ['name', 'breed', 'description', 'age']
 
 class CatDelete(DeleteView):
     model = Cat
@@ -71,7 +71,8 @@ def associate_toy(request, cat_id, toy_id):
 
 def remove_toy(request, cat_id, toy_id):
     cat = Cat.objects.get(id=cat_id)
-    cat.toys.remove(toy_id)
+    toy = Toy.objects.get(id=toy_id)
+    cat.toys.remove(toy)
     return redirect('cat-detail', cat_id=cat.id)
 
   
